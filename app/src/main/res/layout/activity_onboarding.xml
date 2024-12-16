@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.boarding.OnboardingActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/btn_masuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/masuk"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btn_daftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/daftar"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/peach"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/btn_masuk"
+        app:layout_constraintStart_toStartOf="@+id/btn_masuk"
+        app:layout_constraintTop_toBottomOf="@+id/btn_masuk" />
+</androidx.constraintlayout.widget.ConstraintLayout>

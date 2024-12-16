@@ -33,9 +33,32 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    //glide
+    implementation (libs.glide)
+
+    //retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
+    //coroutines
+    implementation (libs.jetbrains.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
+
+    //datastore
+    implementation (libs.androidx.datastore.preferences)
+
+    //livedata
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
