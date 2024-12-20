@@ -2,4 +2,12 @@
     <string name="app_name">Stoup</string>
     <string name="masuk">Masuk</string>
     <string name="daftar">Daftar</string>
+    <string name="simple_caption">Welcome StoUser!</string>
+    <string name="register">Register</string>
+    <string name="have_acc">Already have an account? Login here</string>
+    <string name="simple_caption1">Register to continue</string>
+    <string name="email_hint">example@gmail.com</string>
+    <string name="email_error">Invalid email</string>
+    <string name="password_hint">Password must consist at least 8 char</string>
+    <string name="password_error">Password must be at least 8 characters</string>
 </resources>
