@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.submission.stoup.data.remote.repository.UserRepository
 import com.submission.stoup.di.Injection
 import com.submission.stoup.ui.login.LoginViewModel
-import com.submission.stoup.ui.main.MainViewModel
+import com.submission.stoup.ui.main.HomeViewModel
 import com.submission.stoup.ui.signup.RegisterViewModel
 
 class ViewModelFactory(private val userRepository: UserRepository): ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T{
         return when {
-            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(userRepository) as T
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(userRepository) as T

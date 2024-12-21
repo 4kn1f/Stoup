@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,18 +22,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:indeterminateTint="@color/peach"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/layout_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="600dp"
         android:orientation="vertical"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,10 +49,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:fontFamily="@font/inter"/>
-<!--            android:alpha="0"-->
-<!--            tools:alpha="100" />-->
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tv_caption2"
@@ -63,80 +58,122 @@
             android:text="@string/simple_caption1"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="20dp"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/blue"
-            android:fontFamily="@font/inter" />
-<!--            android:alpha="0"-->
+            android:textColor="@color/blue"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:text="Username"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
-            <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            app:startIconDrawable="@drawable/ic_people_24">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_username"
-                android:layout_width="280dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="@font/inter"
-                android:hint="Username"
-                android:inputType="text"/>
-<!--                android:alpha="0"-->
-<!--                tools:alpha="100" />-->
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <com.submission.stoup.ui.custom.CustomEdtEmail
-                android:id="@+id/ed_email"
-                android:layout_width="280dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/inter"
-                android:hint="Email"
-                android:inputType="textEmailAddress"/>
-<!--                android:alpha="0"-->
-<!--                tools:alpha="100" />-->
-
-            <com.submission.stoup.ui.custom.CustomEdtPw
-                android:id="@+id/ed_password"
-                android:layout_width="280dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/inter"
-                android:hint="Password"
-                android:inputType="textPassword"/>
-<!--                android:alpha="0"-->
-<!--                tools:alpha="100" />-->
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:text="Email"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            app:startIconDrawable="@drawable/ic_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:text="Password"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_signup"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/register"
+                android:layout_marginTop="30dp"
                 android:backgroundTint="@color/blue"
+                android:text="@string/register"
                 app:cornerRadius="10dp"/>
-
-            <TextView
-                android:id="@+id/tv_have_acc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="@string/have_acc"
-                android:fontFamily="@font/inter"
-                android:textSize="14sp"
-                android:layout_gravity="center" />
-
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_have_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/have_acc"
+            android:textSize="14sp"
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

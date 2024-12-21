@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,7 +20,6 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/peach"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +30,7 @@
         android:id="@+id/layout_container"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/white_bg"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -48,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter"
             android:text="@string/simple_caption"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -60,43 +57,82 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="50dp"
-            android:fontFamily="@font/inter"
             android:text="@string/simple_caption2"
             android:textColor="@color/blue"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <com.submission.stoup.ui.custom.CustomEdtEmail
-                android:id="@+id/ed_email"
-                android:layout_width="280dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/inter"
-                android:hint="Email"
-                android:inputType="textEmailAddress"/>
-<!--                tools:alpha="100"-->
-<!--                android:alpha="0"/>-->
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="25dp"
+                android:text="@string/tv_email"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-            <com.submission.stoup.ui.custom.CustomEdtPw
-                android:id="@+id/ed_password"
-                android:layout_width="280dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="50dp"
-                android:fontFamily="@font/inter"
-                android:hint="Password"
-                android:inputType="textPassword"/>
-<!--                tools:alpha="100"-->
-<!--                android:alpha="0"/>-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailEditTextLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="15dp"
+                android:alpha="100"
+                app:startIconDrawable="@drawable/ic_email_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="25dp"
+                android:text="@string/tv_pw"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordEditTextLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_lock_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -105,13 +141,10 @@
                 android:id="@+id/btn_login"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="@color/blue"
-                android:fontFamily="@font/inter"
                 android:text="@string/login"
                 app:cornerRadius="10dp"/>
-<!--                tools:alpha="100" />-->
-<!--                android:alpha="0"-->
         </LinearLayout>
     </LinearLayout>
 

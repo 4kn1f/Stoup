@@ -2,16 +2,13 @@ package com.submission.stoup.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.submission.stoup.R
 import com.submission.stoup.databinding.ActivityLoginBinding
-import com.submission.stoup.ui.main.MainActivity
+import com.submission.stoup.ui.main.HomeActivity
 import com.submission.stoup.ui.viewmodelfactory.ViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
@@ -31,11 +28,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        loginViewModel.loginResult.observe(this){ result ->
+        loginViewModel.loginResult.observe(this) { result ->
             if (result != null) {
                 val token = result.loginResult?.token
                 if (!token.isNullOrEmpty()) {
-                    Toast.makeText(this, "Login successful! Token: $token", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+                    Log.d("LoginActivity", "Login successful! Token: $token")
+
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this, "Token is missing", Toast.LENGTH_SHORT).show()
                 }
@@ -54,15 +56,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        binding.btnLogin.setOnClickListener{
+        binding.btnLogin.setOnClickListener {
             val email = binding.edEmail.text.toString().trim()
             val pw = binding.edPassword.text.toString().trim()
 
-            if (email.isNotEmpty() && pw.isNotEmpty()){
+            if (email.isNotEmpty() && pw.isNotEmpty()) {
                 loginViewModel.login(email, pw)
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+            } else {
+                Toast.makeText(this, "Please fill in first", Toast.LENGTH_SHORT).show()
             }
         }
     }

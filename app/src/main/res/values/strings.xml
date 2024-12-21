@@ -8,8 +8,10 @@
     <string name="simple_caption1">Register to continue</string>
     <string name="email_hint">example@gmail.com</string>
     <string name="email_error">Invalid email</string>
-    <string name="password_hint">Password must consist at least 8 char</string>
     <string name="password_error">Password must be at least 8 characters</string>
     <string name="simple_caption2">Login to continue</string>
     <string name="login">Login</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="tv_email">Email:</string>
+    <string name="tv_pw">Password:</string>
 </resources>
