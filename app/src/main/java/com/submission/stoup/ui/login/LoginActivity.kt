@@ -1,5 +1,7 @@
 package com.submission.stoup.ui.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +27,25 @@ class LoginActivity : AppCompatActivity() {
 
         setupNavigation()
         observeViewModel()
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        val animator = listOf(
+            ObjectAnimator.ofFloat(binding.tvCaption, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvCaption2, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvEmail, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvPassword, View.ALPHA, 0f,1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 0f,1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 0f, 1f).setDuration(500),
+        )
+
+        AnimatorSet().apply {
+            playSequentially(animator)
+            startDelay = 50
+            start()
+        }
     }
 
     private fun observeViewModel() {

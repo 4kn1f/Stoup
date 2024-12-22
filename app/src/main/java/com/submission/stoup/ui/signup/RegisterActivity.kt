@@ -1,5 +1,8 @@
 package com.submission.stoup.ui.signup
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -26,6 +29,28 @@ class RegisterActivity : AppCompatActivity() {
 
         setupNavigation()
         observeViewModel()
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        val animator = listOf(
+            ObjectAnimator.ofFloat(binding.tvCaption, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvCaption2, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvUsername, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.usernameEditTextLayout, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvEmail, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvPassword, View.ALPHA, 0f,1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 0f,1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 0f, 1f).setDuration(500),
+            ObjectAnimator.ofFloat(binding.tvHaveAcc, View.ALPHA, 0f, 1f).setDuration(500)
+        )
+
+        AnimatorSet().apply {
+            playSequentially(animator)
+            startDelay = 100
+            start()
+        }
     }
 
     private fun observeViewModel() {
