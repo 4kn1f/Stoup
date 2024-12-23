@@ -14,4 +14,8 @@
     <string name="hint_password">Enter your password</string>
     <string name="tv_email">Email:</string>
     <string name="tv_pw">Password:</string>
+    <string name="story_image">img story</string>
+    <string name="title_story">Title</string>
+    <string name="description_story">Description</string>
+    <string name="add_story">Add story</string>
 </resources>
