@@ -18,4 +18,8 @@
     <string name="title_story">Title</string>
     <string name="description_story">Description</string>
     <string name="add_story">Add story</string>
+    <string name="select_image">Select image</string>
+    <string name="camera">Camera</string>
+    <string name="use_my_location">Use current location</string>
+    <string name="upload">Upload</string>
 </resources>
