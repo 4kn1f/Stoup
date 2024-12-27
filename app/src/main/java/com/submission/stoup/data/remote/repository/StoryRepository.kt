@@ -10,7 +10,7 @@ class StoryRepository private constructor(private val apiService: ApiService, pr
 
     suspend fun getAllStories(): Result<StoriesResponse> {
         return try {
-            val token = userPreferences.getSessions().first().token.orEmpty()
+            val token = userPreferences.getSessions().first().token
             if (token.isEmpty()) throw Exception("Token tidak valid")
 
             val storiesResponse = apiService.getStories("Bearer $token")
@@ -27,6 +27,17 @@ class StoryRepository private constructor(private val apiService: ApiService, pr
             Result.success(detailStoriesResponse)
         }catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    companion object {
+        @Volatile
+        private var instance: StoryRepository? = null
+
+        fun getInstance(apiService: ApiService, userPreferences: UserPreferences): StoryRepository {
+            return instance ?: synchronized(this) {
+                instance ?: StoryRepository(apiService, userPreferences).also { instance = it }
+            }
         }
     }
 }
