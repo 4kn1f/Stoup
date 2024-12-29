@@ -22,4 +22,6 @@
     <string name="camera">Camera</string>
     <string name="use_my_location">Use current location</string>
     <string name="upload">Upload</string>
+    <string name="logout">Logout</string>
+    <string name="Map">Map</string>
 </resources>

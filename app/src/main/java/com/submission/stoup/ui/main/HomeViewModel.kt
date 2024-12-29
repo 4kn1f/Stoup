@@ -31,4 +31,10 @@ class HomeViewModel(private val userRepository: UserRepository, private val stor
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSessions().asLiveData()
     }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.logout()
+        }
+    }
 }
