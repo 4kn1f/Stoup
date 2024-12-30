@@ -54,6 +54,10 @@ android {
 
 dependencies {
 
+    //map
+    implementation (libs.play.services.maps)
+    implementation (libs.play.services.location)
+
     //glide
     implementation (libs.glide)
 

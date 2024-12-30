@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.submission.stoup.data.remote.repository.StoryRepository
 import com.submission.stoup.data.remote.repository.UserRepository
 import com.submission.stoup.di.Injection
+import com.submission.stoup.ui.add.AddStoryViewModel
 import com.submission.stoup.ui.login.LoginViewModel
 import com.submission.stoup.ui.main.HomeViewModel
 import com.submission.stoup.ui.signup.RegisterViewModel
@@ -22,6 +23,9 @@ class ViewModelFactory(private val userRepository: UserRepository, private val s
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel(storyRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: "+ modelClass.name)
         }
