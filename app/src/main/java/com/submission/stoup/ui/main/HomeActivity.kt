@@ -18,6 +18,7 @@ import com.submission.stoup.data.remote.response.Story
 import com.submission.stoup.databinding.ActivityHomeBinding
 import com.submission.stoup.ui.adapter.StoryAdapter
 import com.submission.stoup.ui.boarding.OnboardingActivity
+import com.submission.stoup.ui.maps.MapsActivity
 import com.submission.stoup.ui.viewmodelfactory.ViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -51,6 +52,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.menu_map -> {
+                startActivity(Intent(this@HomeActivity, MapsActivity::class.java))
+                true
+            }
             R.id.menu_logout -> {
                 lifecycleScope.launch {
                     homeViewModel.logout()

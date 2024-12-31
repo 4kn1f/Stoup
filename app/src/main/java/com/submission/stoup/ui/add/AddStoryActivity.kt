@@ -1,3 +1,5 @@
+package com.submission.stoup.ui.add
+
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
@@ -15,7 +17,6 @@ import com.submission.stoup.data.utils.getImageUri
 import com.submission.stoup.data.utils.reduceFileImage
 import com.submission.stoup.data.utils.uriToFile
 import com.submission.stoup.databinding.ActivityAddStoryBinding
-import com.submission.stoup.ui.add.AddStoryViewModel
 import com.submission.stoup.ui.viewmodelfactory.ViewModelFactory
 
 class AddStoryActivity : AppCompatActivity() {
