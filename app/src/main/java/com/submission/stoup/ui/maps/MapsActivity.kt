@@ -57,6 +57,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setMapStyle() {
+        try {
+            val success =
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+            if (!success) {
+                Log.e(TAG, "Failed to parsing map style")
+            }
+        } catch (exception: Resources.NotFoundException) {
+            Log.e(TAG, "Couldn't found map style: ", exception)
+        }
     }
 
     private fun getMyLocation() {
