@@ -7,6 +7,7 @@ import com.submission.stoup.data.remote.response.RegisterResponse
 import com.submission.stoup.data.remote.response.StoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -58,4 +59,9 @@ interface ApiService {
         @Part("lon") lon: RequestBody? = null
     ) : AddStoriesResponse
 
+    @GET("stories")
+    suspend fun getStoriesWithLocation(
+        @Header("Authorization") token: String,
+        @Query("location") location: Int? = 1,
+    ): StoriesResponse
 }

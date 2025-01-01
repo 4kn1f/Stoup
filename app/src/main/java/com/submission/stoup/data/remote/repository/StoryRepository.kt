@@ -39,6 +39,18 @@ class StoryRepository private constructor(
         }
     }
 
+    suspend fun getStoriesLocation(): Result<StoriesResponse> {
+        return try {
+            val token = userPreferences.getSessions().first().token
+            if (token.isEmpty()) throw Exception("Invalid token")
+
+            val locationResponse = apiService.getStoriesWithLocation("Bearer $token")
+            Result.success(locationResponse)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     suspend fun addStory(description: String, imageFile: File, latitude: Double? = null, longitude: Double? = null): Result<AddStoriesResponse> {
         return try {
             val token = userPreferences.getSessions().first().token

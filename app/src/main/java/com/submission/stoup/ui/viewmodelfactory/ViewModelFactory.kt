@@ -9,6 +9,7 @@ import com.submission.stoup.di.Injection
 import com.submission.stoup.ui.add.AddStoryViewModel
 import com.submission.stoup.ui.login.LoginViewModel
 import com.submission.stoup.ui.main.HomeViewModel
+import com.submission.stoup.ui.maps.MapsViewModel
 import com.submission.stoup.ui.signup.RegisterViewModel
 
 class ViewModelFactory(private val userRepository: UserRepository, private val storyRepository: StoryRepository): ViewModelProvider.NewInstanceFactory() {
@@ -26,6 +27,9 @@ class ViewModelFactory(private val userRepository: UserRepository, private val s
             }
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(storyRepository) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: "+ modelClass.name)
         }
