@@ -19,6 +19,7 @@ constraintlayout = "2.2.0"
 playServicesLocation = "20.0.0"
 playServicesMaps = "18.1.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+pagingRuntimeKtx = "3.3.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
+androidx-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
