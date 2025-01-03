@@ -10,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.submission.stoup.data.remote.response.Story
 import com.submission.stoup.databinding.ItemStoryBinding
 
-class StoryAdapter : ListAdapter<Story, StoryAdapter.StoryViewHolder>(DiffCallback) {
+class StoryAdapter(private val onItemClickListener: (Story) -> Unit) : ListAdapter<Story, StoryAdapter.StoryViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoryViewHolder(binding)
+        return StoryViewHolder(binding, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
@@ -22,13 +22,17 @@ class StoryAdapter : ListAdapter<Story, StoryAdapter.StoryViewHolder>(DiffCallba
         holder.bind(story)
     }
 
-    class StoryViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class StoryViewHolder(private val binding: ItemStoryBinding, private val onItemClickListener: (Story) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             binding.tvTitle.text = story.name
             binding.tvDescription.text = story.description
             Glide.with(binding.root)
                 .load(story.photoUrl)
                 .into(binding.imgStory)
+
+            itemView.setOnClickListener {
+                onItemClickListener(story)
+            }
         }
     }
 

@@ -17,7 +17,9 @@ import com.submission.stoup.data.remote.pref.dataStore
 import com.submission.stoup.data.remote.response.Story
 import com.submission.stoup.databinding.ActivityHomeBinding
 import com.submission.stoup.ui.adapter.StoryAdapter
+import com.submission.stoup.ui.add.AddStoryActivity
 import com.submission.stoup.ui.boarding.OnboardingActivity
+import com.submission.stoup.ui.detail.DetailStoryActivity
 import com.submission.stoup.ui.maps.MapsActivity
 import com.submission.stoup.ui.viewmodelfactory.ViewModelFactory
 import kotlinx.coroutines.launch
@@ -37,12 +39,29 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        storyAdapter = StoryAdapter()
-        binding.rvStory.layoutManager = LinearLayoutManager(this)
-        binding.rvStory.adapter = storyAdapter
-
+        setupRV()
         observeViewModel()
         homeViewModel.getAllStories()
+    }
+
+    private fun setupRV() {
+        binding.apply {
+
+            binding.rvStory.layoutManager = LinearLayoutManager(this@HomeActivity)
+            binding.rvStory.adapter = storyAdapter
+
+            storyAdapter = StoryAdapter { story ->
+                val intent = Intent(this@HomeActivity, DetailStoryActivity::class.java).apply {
+                    putExtra(DetailStoryActivity.EXTRA_ID_STORY, story.id)
+                }
+                startActivity(intent)
+            }
+
+            fabAddStory.setOnClickListener{
+                val intent = Intent(this@HomeActivity, AddStoryActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
