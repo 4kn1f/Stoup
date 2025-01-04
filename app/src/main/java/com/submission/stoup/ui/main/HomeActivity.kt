@@ -14,6 +14,7 @@ import com.submission.stoup.R
 import com.submission.stoup.data.remote.pref.UserModel
 import com.submission.stoup.data.remote.pref.UserPreferences
 import com.submission.stoup.data.remote.pref.dataStore
+import com.submission.stoup.data.remote.response.ListStoryItem
 import com.submission.stoup.data.remote.response.Story
 import com.submission.stoup.databinding.ActivityHomeBinding
 import com.submission.stoup.ui.adapter.StoryAdapter
@@ -45,22 +46,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupRV() {
-        binding.apply {
-
-            binding.rvStory.layoutManager = LinearLayoutManager(this@HomeActivity)
-            binding.rvStory.adapter = storyAdapter
-
-            storyAdapter = StoryAdapter { story ->
-                val intent = Intent(this@HomeActivity, DetailStoryActivity::class.java).apply {
-                    putExtra(DetailStoryActivity.EXTRA_ID_STORY, story.id)
-                }
-                startActivity(intent)
+        storyAdapter = StoryAdapter { story ->
+            val intent = Intent(this@HomeActivity, DetailStoryActivity::class.java).apply {
+                putExtra(DetailStoryActivity.EXTRA_ID_STORY, story.id)
             }
+            startActivity(intent)
+        }
 
-            fabAddStory.setOnClickListener{
-                val intent = Intent(this@HomeActivity, AddStoryActivity::class.java)
-                startActivity(intent)
-            }
+        binding.rvStory.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            adapter = storyAdapter
+        }
+
+        binding.fabAddStory.setOnClickListener {
+            val intent = Intent(this@HomeActivity, AddStoryActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -76,22 +76,33 @@ class HomeActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_logout -> {
-                lifecycleScope.launch {
-                    homeViewModel.logout()
-                    UserPreferences.getInstance(this@HomeActivity.dataStore).logout()
-                    Toast.makeText(this@HomeActivity, "Berhasil log out", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@HomeActivity, OnboardingActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
+                logout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    private fun logout() {
+        lifecycleScope.launch {
+            homeViewModel.logout()
+            UserPreferences.getInstance(this@HomeActivity.dataStore).logout()
+            Toast.makeText(this@HomeActivity, "Berhasil log out", Toast.LENGTH_SHORT).show()
+            Intent(this@HomeActivity, OnboardingActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
+            finish()
+        }
+    }
+
     private fun observeViewModel() {
+
+        homeViewModel.pagingStories.observe(this) { pagingData ->
+            lifecycleScope.launch {
+                storyAdapter.submitData(pagingData)
+            }
+        }
 
         homeViewModel.getSession().observe(this){ user ->
             userSession = user
@@ -99,23 +110,6 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewModel.isLoading.observe(this){ isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-
-        homeViewModel.stories.observe(this){ result ->
-            result.onSuccess { storiesResponse ->
-                val storyList = storiesResponse?.listStory?.map { listStoryItem ->
-                    Story(
-                        id = listStoryItem?.id ?: "",
-                        name = listStoryItem?.name ?: "",
-                        description = listStoryItem?.description ?: "",
-                        photoUrl = listStoryItem?.photoUrl ?: ""
-                    )
-                }
-                storyAdapter.submitList(storyList)
-            }
-            result.onFailure { exception ->
-                Toast.makeText(this, "Failed to load stories: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 }

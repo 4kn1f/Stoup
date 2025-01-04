@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.submission.stoup.data.remote.pref.UserModel
 import com.submission.stoup.data.remote.repository.StoryRepository
 import com.submission.stoup.data.remote.repository.UserRepository
+import com.submission.stoup.data.remote.response.ListStoryItem
 import com.submission.stoup.data.remote.response.StoriesResponse
 import kotlinx.coroutines.launch
 
@@ -18,6 +21,8 @@ class HomeViewModel(private val userRepository: UserRepository, private val stor
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    val pagingStories: LiveData<PagingData<ListStoryItem>> = storyRepository.getStoriesPaging().cachedIn(viewModelScope)
 
     fun getAllStories() {
         _isLoading.value = true

@@ -1,11 +1,19 @@
 package com.submission.stoup.data.remote.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.submission.stoup.data.paging.StoryPagingSource
 import com.submission.stoup.data.remote.pref.UserPreferences
 import com.submission.stoup.data.remote.response.AddStoriesResponse
 import com.submission.stoup.data.remote.response.DetailStoriesResponse
+import com.submission.stoup.data.remote.response.ListStoryItem
 import com.submission.stoup.data.remote.response.StoriesResponse
 import com.submission.stoup.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -49,6 +57,22 @@ class StoryRepository private constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    fun getStoriesPaging(): LiveData<PagingData<ListStoryItem>> {
+        val token = runBlocking {
+            userPreferences.getSessions().first().token
+        }
+        if (token.isEmpty()) throw Exception("Token tidak valid")
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, token)
+            }
+        ).liveData
     }
 
     suspend fun addStory(description: String, imageFile: File, latitude: Double? = null, longitude: Double? = null): Result<AddStoriesResponse> {
